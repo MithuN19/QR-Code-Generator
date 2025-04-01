@@ -15,20 +15,7 @@
         <div id="qrcode"></div>
     </div>
     
-    <script>
-        function generateQR() {
-            let text = document.getElementById("text").value;
-            let qrCodeDiv = document.getElementById("qrcode");
-            qrCodeDiv.innerHTML = "";
-            new QRCode(qrCodeDiv, {
-                text: text,
-                width: 200,
-                height: 200,
-                colorDark: "#000",
-                colorLight: "#fff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-    </script>
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
