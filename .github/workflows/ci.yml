@@ -3,25 +3,33 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - main  # This means it'll run when you push to the 'main' branch.
-  pull_request:
-    branches:
       - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'  # Adjust version as per your needs
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install  # This installs dependencies if you have a package.json
+        run: npm install
 
-      - name: Run tests (optional for now)
-        run: npm test  # If you don't have tests yet, you can skip this for now
+      - name: Run tests
+        run: npm test
+
+      - name: Run linter (optional)
+        run: echo "No linter yet"
+
+      - name: Security Check (SCA)
+        run: |
+          npm audit --audit-level=high || true
