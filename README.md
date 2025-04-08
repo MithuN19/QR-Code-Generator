@@ -1,2 +1,15 @@
-# QR-Code-Generator
-**QR Code Generator**   A simple and user-friendly **QR Code Generator** built with **HTML, CSS, and JavaScript**. Enter any text or URL to generate a QR code instantly. The app features a modern UI, real-time QR generation, and a responsive design.
+## 🚀 Live Demo
+👉 [Click here to try the QR Code Generator](https://mithun19.github.io/QR-Code-Generator/)
+
+## ✅ Features
+- Generate QR Codes for any text or link
+- Fully browser-based (no backend)
+- Responsive layout using HTML/CSS
+- CI with GitHub Actions
+- Unit testing using Jest
+
+## 🧪 DevOps Setup
+- ✔️ Automated testing with Jest
+- ✔️ GitHub Actions CI pipeline
+- ✔️ Security scan via `npm audit`
+- ✔️ GitHub Pages deployment

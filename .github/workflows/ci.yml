@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -8,28 +8,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x, 18.x]
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
       - name: Install dependencies
         run: npm install
-
       - name: Run tests
         run: npm test
+      - name: Security Check
+        run: npm audit --audit-level=high || true
 
-      - name: Run linter (optional)
-        run: echo "No linter yet"
-
-      - name: Security Check (SCA)
-        run: |
-          npm audit --audit-level=high || true
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # or ./docs if you move files there
