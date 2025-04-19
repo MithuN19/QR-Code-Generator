@@ -30,7 +30,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 10px 5px 0 5px;
     transition: 0.3s;
 }
 
@@ -43,3 +43,30 @@ button:hover {
     display: flex;
     justify-content: center;
 }
+
+.pro-badge {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+/* Optional glowing effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 0px rgba(255, 215, 0, 0.5);
+    }
+}
+

@@ -1,8 +1,14 @@
+let qr; // global QR code instance
+
 function generateQR() {
-    let text = document.getElementById("text").value;
-    let qrCodeDiv = document.getElementById("qrcode");
-    qrCodeDiv.innerHTML = "";  // Clear previous QR code
-    new QRCode(qrCodeDiv, {
+    const text = document.getElementById("text").value;
+    const qrCodeDiv = document.getElementById("qrcode");
+
+    // Clear previous QR
+    qrCodeDiv.innerHTML = "";
+
+    // Generate QR
+    qr = new QRCode(qrCodeDiv, {
         text: text,
         width: 200,
         height: 200,
@@ -10,4 +16,19 @@ function generateQR() {
         colorLight: "#fff",
         correctLevel: QRCode.CorrectLevel.H
     });
+}
+
+function downloadQR() {
+    const qrCanvas = document.querySelector('#qrcode canvas');
+
+    if (!qrCanvas) {
+        alert("Please generate a QR code first!");
+        return;
+    }
+
+    const imgData = qrCanvas.toDataURL("image/png");
+    const link = document.createElement('a');
+    link.href = imgData;
+    link.download = "qrcode.png";
+    link.click();
 }
